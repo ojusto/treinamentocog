@@ -1,27 +1,29 @@
-import * as React from 'react';
-import * as ReactDom from 'react-dom';
-import { Version } from '@microsoft/sp-core-library';
+import * as React from "react";
+import * as ReactDom from "react-dom";
+import { Version } from "@microsoft/sp-core-library";
 import {
   IPropertyPaneConfiguration,
-  PropertyPaneTextField
-} from '@microsoft/sp-property-pane';
-import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
+  PropertyPaneTextField,
+} from "@microsoft/sp-property-pane";
+import { BaseClientSideWebPart } from "@microsoft/sp-webpart-base";
 
-import * as strings from 'CrudReactWebPartStrings';
-import CrudReact from './components/CrudReact';
-import { ICrudReactProps } from './components/ICrudReactProps';
+import * as strings from "CrudReactWebPartStrings";
+import CrudReact from "./components/CrudReact";
+import { ICrudReactProps } from "./components/ICrudReactProps";
 
 export interface ICrudReactWebPartProps {
-  description: string;
+  listName: string;
 }
 
-export default class CrudReactWebPart extends BaseClientSideWebPart<ICrudReactWebPartProps> {
-
+export default class CrudReactWebPart extends BaseClientSideWebPart<
+  ICrudReactWebPartProps
+> {
   public render(): void {
     const element: React.ReactElement<ICrudReactProps> = React.createElement(
       CrudReact,
       {
-        description: this.properties.description
+        listName: this.properties.listName,
+        context: this.context,
       }
     );
 
@@ -33,7 +35,7 @@ export default class CrudReactWebPart extends BaseClientSideWebPart<ICrudReactWe
   }
 
   protected get dataVersion(): Version {
-    return Version.parse('1.0');
+    return Version.parse("1.0");
   }
 
   protected getPropertyPaneConfiguration(): IPropertyPaneConfiguration {
@@ -41,20 +43,20 @@ export default class CrudReactWebPart extends BaseClientSideWebPart<ICrudReactWe
       pages: [
         {
           header: {
-            description: strings.PropertyPaneDescription
+            description: strings.PropertyPaneDescription,
           },
           groups: [
             {
               groupName: strings.BasicGroupName,
               groupFields: [
-                PropertyPaneTextField('description', {
-                  label: strings.DescriptionFieldLabel
-                })
-              ]
-            }
-          ]
-        }
-      ]
+                PropertyPaneTextField("listName", {
+                  label: strings.DescriptionFieldLabel,
+                }),
+              ],
+            },
+          ],
+        },
+      ],
     };
   }
 }
