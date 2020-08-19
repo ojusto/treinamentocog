@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "crud-sem-freamework-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/crudSemFreamework/CrudSemFreameworkWebPart.js",
+          "manifest": "./src/webparts/crudSemFreamework/CrudSemFreameworkWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "CrudSemFreameworkWebPartStrings": "lib/webparts/crudSemFreamework/loc/{locale}.js"
+  }
+}
